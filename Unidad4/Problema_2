@@ -1,0 +1,239 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyND+P3sf8sZFxHCca1eToaJ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Ernesto23lolxd/Probabilidad/blob/main/Unidad4/Problema_2\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Aunque el problema podría modelarse con una Binomial porque:\n",
+        "\n",
+        "Hay un número fijo de motores: n=1000n=1000n=1000.\n",
+        "Cada motor puede ser defectuoso o no defectuoso.\n",
+        "La probabilidad de defecto es constante: p=0.001p=0.001p=0.001.\n",
+        "\n",
+        "Se utiliza Poisson porque:\n",
+        "\n",
+        "nnn es muy grande (100010001000).\n",
+        "ppp es muy pequeño (0.0010.0010.001).\n",
+        "Se cumple la aproximación de Poisson a la Binomial.\n",
+        "\n",
+        "Calculamos:\n",
+        "\n",
+        "λ=np=(1000)(0.001)=1\\lambda=np=(1000)(0.001)=1λ=np=(1000)(0.001)=1\n",
+        "\n",
+        "Por lo tanto:\n",
+        "\n",
+        "X∼Poisson(λ=1)X \\sim Poisson(\\lambda=1)X∼Poisson(λ=1)\n",
+        "\n",
+        "donde XXX representa el número de motores defectuosos en el embarque."
+      ],
+      "metadata": {
+        "id": "xfY7QEvKnwP4"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YCrYTbQsnlfV",
+        "outputId": "ef5565a8-7533-4784-a3b4-812d28ddbf65"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Probabilidad de que ningún motor sea defectuoso:\n",
+            "0.367879\n",
+            "Porcentaje = 36.79 %\n"
+          ]
+        }
+      ],
+      "source": [
+        "from scipy.stats import poisson\n",
+        "\n",
+        "# Parámetro de Poisson\n",
+        "lam = 1000 * 0.001\n",
+        "\n",
+        "# Probabilidad de 0 defectuosos\n",
+        "p0 = poisson.pmf(0, lam)\n",
+        "\n",
+        "print(\"Probabilidad de que ningún motor sea defectuoso:\")\n",
+        "print(round(p0, 6))\n",
+        "print(\"Porcentaje =\", round(p0*100, 2), \"%\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from scipy.stats import poisson\n",
+        "\n",
+        "lam = 1\n",
+        "\n",
+        "p3 = poisson.pmf(3, lam)\n",
+        "\n",
+        "print(\"Probabilidad de que 3 motores sean defectuosos:\")\n",
+        "print(round(p3, 6))\n",
+        "print(\"Porcentaje =\", round(p3*100, 2), \"%\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "19EEmu_Nn7Qi",
+        "outputId": "bbd41d6a-eb41-4e62-9843-1144db0375fd"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Probabilidad de que 3 motores sean defectuosos:\n",
+            "0.061313\n",
+            "Porcentaje = 6.13 %\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from scipy.stats import poisson\n",
+        "\n",
+        "lam = 1\n",
+        "\n",
+        "p4 = poisson.pmf(4, lam)\n",
+        "\n",
+        "print(\"Probabilidad de que 4 motores sean defectuosos:\")\n",
+        "print(round(p4, 6))\n",
+        "print(\"Porcentaje =\", round(p4*100, 2), \"%\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "xiDfrjd1n-WK",
+        "outputId": "52b2a569-2061-4c60-911c-0b6011170fce"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Probabilidad de que 4 motores sean defectuosos:\n",
+            "0.015328\n",
+            "Porcentaje = 1.53 %\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from scipy.stats import poisson\n",
+        "\n",
+        "# ======================================\n",
+        "# DATOS DEL PROBLEMA\n",
+        "# ======================================\n",
+        "\n",
+        "n = 1000\n",
+        "p = 0.001\n",
+        "\n",
+        "# Parámetro λ de Poisson\n",
+        "lam = n * p\n",
+        "\n",
+        "print(\"DISTRIBUCIÓN UTILIZADA: POISSON\")\n",
+        "print(\"λ =\", lam)\n",
+        "\n",
+        "# ======================================\n",
+        "# A) Ningún defectuoso\n",
+        "# ======================================\n",
+        "\n",
+        "p0 = poisson.pmf(0, lam)\n",
+        "\n",
+        "print(\"\\nA) Ningún motor defectuoso\")\n",
+        "print(\"P(X=0) =\", round(p0, 6))\n",
+        "print(\"Porcentaje =\", round(p0*100, 2), \"%\")\n",
+        "\n",
+        "# ======================================\n",
+        "# B) Tres defectuosos\n",
+        "# ======================================\n",
+        "\n",
+        "p3 = poisson.pmf(3, lam)\n",
+        "\n",
+        "print(\"\\nB) Tres motores defectuosos\")\n",
+        "print(\"P(X=3) =\", round(p3, 6))\n",
+        "print(\"Porcentaje =\", round(p3*100, 2), \"%\")\n",
+        "\n",
+        "# ======================================\n",
+        "# C) Cuatro defectuosos\n",
+        "# ======================================\n",
+        "\n",
+        "p4 = poisson.pmf(4, lam)\n",
+        "\n",
+        "print(\"\\nC) Cuatro motores defectuosos\")\n",
+        "print(\"P(X=4) =\", round(p4, 6))\n",
+        "print(\"Porcentaje =\", round(p4*100, 2), \"%\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7YVecStCoB-i",
+        "outputId": "c023bade-d0a6-421b-c28f-cecdf05b9157"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "DISTRIBUCIÓN UTILIZADA: POISSON\n",
+            "λ = 1.0\n",
+            "\n",
+            "A) Ningún motor defectuoso\n",
+            "P(X=0) = 0.367879\n",
+            "Porcentaje = 36.79 %\n",
+            "\n",
+            "B) Tres motores defectuosos\n",
+            "P(X=3) = 0.061313\n",
+            "Porcentaje = 6.13 %\n",
+            "\n",
+            "C) Cuatro motores defectuosos\n",
+            "P(X=4) = 0.015328\n",
+            "Porcentaje = 1.53 %\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
